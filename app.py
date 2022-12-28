@@ -16,22 +16,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///birthdays.db'
 db = SQLAlchemy(app)
 # db = SQL("sqlite:///birthdays.db")
 
-# ------------------------------------------
-# Models
-#----------------------------------------------
-class Birthdays(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Text)
-    month = db.Column(db.Integer)
-    day = db.Column(db.Integer)
+# # ------------------------------------------
+# # Import Models
+# #----------------------------------------------
 
-    def __repr__(self) -> str:
-        return f"Item {self.name}"
+from models import Birthdays
 
-db.init_app(app)
-
-with app.app_context():
-    db.create_all()
 
 # ------------------------------------------
 # Routes
