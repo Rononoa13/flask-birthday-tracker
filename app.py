@@ -1,7 +1,7 @@
 import os
 
 # from cs50 import SQL
-from flask import Flask, flash, jsonify, redirect, render_template, request, session
+from flask import Flask, flash, jsonify, redirect, render_template, request, session, url_for
 
 from flask_sqlalchemy import SQLAlchemy
 # Configure application
@@ -52,9 +52,7 @@ def index():
 
         # TODO: Add the user's entry into the database
         name = request.form.get("name")
-        
         month = request.form.get("month")
-        
         day = request.form.get("day")
         
         # Add to database
@@ -64,8 +62,14 @@ def index():
         return redirect("/")
 # Add user to the database
     else:
-
         # TODO: Display the entries in the database on index.html
-
         birthdays = Birthdays.query.all()
         return render_template("index.html", birthdays=birthdays)
+
+# Endpoint for deleting a record
+@app.route("/delete/<id>", methods = ['GET', 'POST'])
+def delete(id):
+    my_data = Birthdays.query.get(id)
+    db.session.delete(my_data)
+    db.session.commit()
+    return redirect(url_for('index'))
