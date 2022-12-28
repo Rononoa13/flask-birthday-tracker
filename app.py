@@ -1,6 +1,3 @@
-import os
-
-# from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, url_for
 
 from flask_sqlalchemy import SQLAlchemy
@@ -12,9 +9,9 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 # ensure database sqlite 
 app.config['SECRET_KEY'] = 'test'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///birthdays.db'
-# Configure CS50 Library to use SQLite database
+
 db = SQLAlchemy(app)
-# db = SQL("sqlite:///birthdays.db")
+
 
 # # ------------------------------------------
 # # Import Models
@@ -45,6 +42,10 @@ def index():
         month = request.form.get("month")
         day = request.form.get("day")
         
+        # Validation for empty name and negative month and day.
+        if not name or int(month) < 1 or int(day) < 1:
+            return render_template("failure.html")
+            
         # Add to database
         new_friend_date = Birthdays(name=name, month=month, day=day)
         db.session.add(new_friend_date)
@@ -62,4 +63,4 @@ def delete(id):
     my_data = Birthdays.query.get(id)
     db.session.delete(my_data)
     db.session.commit()
-    return redirect(url_for('index'))
+    return redirect("/")
