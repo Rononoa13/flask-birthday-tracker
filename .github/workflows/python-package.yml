@@ -39,4 +39,5 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: dockship001/devopswithpython
         push: true
+        tag_with_ref: true
      
