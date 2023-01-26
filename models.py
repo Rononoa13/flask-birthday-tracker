@@ -1,4 +1,4 @@
-from app import db, app
+from app import db
 
 # ------------------------------------------
 # Models
@@ -12,7 +12,7 @@ class Birthdays(db.Model):
     def __repr__(self) -> str:
         return f"Item {self.name}"
 
-db.init_app(app)
+#db.init_app(app)
 
-with app.app_context():
-    db.create_all()
+#with app.app_context():
+#    db.create_all()
