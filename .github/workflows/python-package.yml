@@ -37,4 +37,4 @@ jobs:
       with:
         push: true
         tags: dockship001/nextwebapp:latest, dockship001/nextwebapp:${{ github.run_number }}
-     
+        tag_with_ref: true
