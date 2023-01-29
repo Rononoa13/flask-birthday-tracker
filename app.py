@@ -1,6 +1,5 @@
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, url_for
-
-from flask_sqlalchemy import SQLAlchemy
+from models import db, Birthdays
 # Configure application
 app = Flask(__name__)
 
@@ -10,14 +9,14 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config['SECRET_KEY'] = 'test'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///birthdays.db'
 
-db = SQLAlchemy(app)
+db.init_app(app)
 
 
 # # ------------------------------------------
 # # Import Models
 # #----------------------------------------------
 
-from models import Birthdays
+# from models import Birthdays
 
 
 # ------------------------------------------
