@@ -1,14 +1,15 @@
 FROM python
 
 WORKDIR /app
+
+# Copy the appliction coe to the container
+COPY . /app
+
 # Copy the requirements file to the container
-COPY requirements.txt .
+#COPY requirements.txt .
 
 #Install the Python dependencies
 RUN pip install -r requirements.txt
-
-# Copy the appliction coe to the container
-COPY . .
 
 
 # Set the environment variables
@@ -19,4 +20,4 @@ ENV FLASK_RUN_HOST=0.0.0.0
 EXPOSE 5000
 
 # Run the Flask application
-CMD ["flask", "run"]
+CMD ["python", "app.py"]
