@@ -7,7 +7,8 @@ app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 # ensure database sqlite 
 app.config['SECRET_KEY'] = 'test'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///birthdays.db'
+# 'postgresql://username:password@host:port/database_name'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{user}:{password}@{host}:{port}/{database}'
 
 db.init_app(app)
 
